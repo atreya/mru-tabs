@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MRU Tabs</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="popup" aria-live="polite">
+      <header class="header">
+        <img src="icons/icon-32.png" width="32" height="32" alt="">
+        <div>
+          <h1>MRU Tabs</h1>
+          <p id="count">Loading</p>
+        </div>
+      </header>
+
+      <section class="preview-grid" aria-label="MRU destinations">
+        <article class="destination older">
+          <div class="destination-meta">
+            <span class="direction">Older</span>
+            <kbd>Cmd+.</kbd>
+          </div>
+          <p id="older-title" class="tab-title">Loading...</p>
+        </article>
+
+        <article class="destination newer">
+          <div class="destination-meta">
+            <span class="direction">Newer</span>
+            <kbd>Cmd+Shift+.</kbd>
+          </div>
+          <p id="newer-title" class="tab-title">Loading...</p>
+        </article>
+      </section>
+
+      <section class="stack-section" aria-label="Recent tab order">
+        <h2>Recent Order</h2>
+        <ol id="stack" class="stack"></ol>
+      </section>
+
+      <p id="message" class="message" hidden></p>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>

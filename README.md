@@ -8,6 +8,7 @@ A tiny local Chrome extension for switching tabs in most-recently-used order.
 - `mru-newer-tab`: moves forward through that same stack.
 - Tracks MRU order separately for each Chrome window.
 - Keeps keyboard-driven MRU navigation from rewriting the stack, so repeated presses walk through recent tabs instead of only toggling two tabs.
+- Shows a toolbar popup with the next older and newer MRU destinations before you switch.
 
 ## Install In Chrome
 
@@ -19,6 +20,7 @@ A tiny local Chrome extension for switching tabs in most-recently-used order.
 6. Confirm the shortcuts:
    - Previous recent tab: `Cmd+.`
    - Next recent tab: `Cmd+Shift+.`
+7. Pin MRU Tabs from the extensions menu if you want quick access to the preview popup.
 
 ## Changing Shortcuts
 

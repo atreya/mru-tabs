@@ -1,0 +1,165 @@
+:root {
+  color-scheme: light;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #172033;
+  background: #f8fafc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 340px;
+  margin: 0;
+  background: #f8fafc;
+}
+
+.popup {
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.header p {
+  margin-top: 2px;
+  color: #667085;
+  font-size: 12px;
+}
+
+.preview-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.destination {
+  min-height: 82px;
+  padding: 12px;
+  border: 1px solid #d6dde8;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.destination.older {
+  border-left: 4px solid #14b8a6;
+}
+
+.destination.newer {
+  border-left: 4px solid #2563eb;
+}
+
+.destination-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.direction {
+  color: #667085;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+kbd {
+  padding: 3px 6px;
+  border: 1px solid #c8d1df;
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  color: #344054;
+  background: #f3f6fb;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.tab-title {
+  display: -webkit-box;
+  margin-top: 10px;
+  overflow: hidden;
+  color: #172033;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.stack-section {
+  margin-top: 16px;
+}
+
+h2 {
+  margin-bottom: 8px;
+  color: #667085;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.stack {
+  display: grid;
+  max-height: 168px;
+  margin: 0;
+  padding: 0;
+  gap: 6px;
+  overflow: auto;
+  list-style: none;
+}
+
+.stack li {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 7px 9px;
+  border-radius: 8px;
+  color: #344054;
+  background: #edf2f7;
+  font-size: 12px;
+}
+
+.stack li.current {
+  color: #ffffff;
+  background: #172033;
+}
+
+.rank {
+  color: inherit;
+  opacity: .72;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 700;
+}
+
+.stack-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.message {
+  margin-top: 12px;
+  color: #667085;
+  font-size: 13px;
+  line-height: 1.35;
+}

@@ -167,6 +167,91 @@ async function activateTabByMruOffset(offset) {
   }
 }
 
+function summarizeTab(tab) {
+  if (!tab) {
+    return null;
+  }
+
+  return {
+    id: tab.id,
+    title: tab.title || "Untitled tab",
+    active: Boolean(tab.active)
+  };
+}
+
+async function getMruPreview() {
+  const [activeTab] = await chrome.tabs.query({
+    active: true,
+    currentWindow: true
+  });
+
+  if (!activeTab || typeof activeTab.windowId !== "number") {
+    return {
+      current: null,
+      older: null,
+      newer: null,
+      stack: []
+    };
+  }
+
+  const state = await loadState();
+  await seedWindowState(state, activeTab.windowId);
+
+  const windowState = getWindowState(state, activeTab.windowId);
+  const activeIndex = windowState.stack.indexOf(activeTab.id);
+
+  if (activeIndex !== -1) {
+    windowState.cursor = activeIndex;
+  }
+
+  normalizeWindowState(windowState);
+  await saveState(state);
+
+  const tabs = await chrome.tabs.query({ windowId: activeTab.windowId });
+  const tabsById = new Map(tabs.map((tab) => [tab.id, tab]));
+  const stack = windowState.stack
+    .map((tabId) => tabsById.get(tabId))
+    .filter(Boolean)
+    .map(summarizeTab);
+
+  if (stack.length < 2) {
+    return {
+      current: summarizeTab(activeTab),
+      older: null,
+      newer: null,
+      stack
+    };
+  }
+
+  const olderIndex = (windowState.cursor + 1) % windowState.stack.length;
+  const newerIndex =
+    (windowState.cursor - 1 + windowState.stack.length) % windowState.stack.length;
+
+  return {
+    current: summarizeTab(tabsById.get(activeTab.id) || activeTab),
+    older: summarizeTab(tabsById.get(windowState.stack[olderIndex])),
+    newer: summarizeTab(tabsById.get(windowState.stack[newerIndex])),
+    stack
+  };
+}
+
+chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+  if (message?.type !== "get-mru-preview") {
+    return false;
+  }
+
+  getMruPreview()
+    .then((preview) => sendResponse({ ok: true, preview }))
+    .catch((error) =>
+      sendResponse({
+        ok: false,
+        error: error?.message || "Unable to load MRU preview."
+      })
+    );
+
+  return true;
+});
+
 chrome.commands.onCommand.addListener((command) => {
   if (command === "mru-older-tab") {
     void activateTabByMruOffset(1);
