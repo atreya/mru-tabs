@@ -17,10 +17,8 @@ A tiny local Chrome extension for switching tabs in most-recently-used order.
 4. Select the cloned `mru-tabs` repository folder.
 5. Open `chrome://extensions/shortcuts`.
 6. Confirm the shortcuts:
-   - Previous recent tab: `Ctrl+.`
-   - Next recent tab: `Ctrl+Shift+.`
-
-Chrome calls the real macOS Control key `MacCtrl` in extension manifests, but the shortcut UI should display it as Control.
+   - Previous recent tab: `Cmd+.`
+   - Next recent tab: `Cmd+Shift+.`
 
 ## Changing Shortcuts
 

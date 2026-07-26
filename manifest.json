@@ -13,13 +13,13 @@
   "commands": {
     "mru-older-tab": {
       "suggested_key": {
-        "mac": "MacCtrl+Period"
+        "mac": "Command+Period"
       },
       "description": "Switch to the next older recently used tab"
     },
     "mru-newer-tab": {
       "suggested_key": {
-        "mac": "MacCtrl+Shift+Period"
+        "mac": "Command+Shift+Period"
       },
       "description": "Switch to the next newer recently used tab"
     }
