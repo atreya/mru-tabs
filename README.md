@@ -14,7 +14,7 @@ A tiny local Chrome extension for switching tabs in most-recently-used order.
 1. Open `chrome://extensions`.
 2. Turn on **Developer mode**.
 3. Click **Load unpacked**.
-4. Select this folder: `/Users/catreya/Documents/Codex/2026-07-25/i/outputs/mru-tabs`.
+4. Select the cloned `mru-tabs` repository folder.
 5. Open `chrome://extensions/shortcuts`.
 6. Confirm the shortcuts:
    - Previous recent tab: `Ctrl+.`
