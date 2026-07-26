@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "MRU Tabs",
+  "description": "Switch Chrome tabs in most-recently-used order.",
+  "version": "0.1.0",
+  "permissions": ["storage", "tabs"],
+  "background": {
+    "service_worker": "service_worker.js"
+  },
+  "commands": {
+    "mru-older-tab": {
+      "suggested_key": {
+        "mac": "MacCtrl+Period"
+      },
+      "description": "Switch to the next older recently used tab"
+    },
+    "mru-newer-tab": {
+      "suggested_key": {
+        "mac": "MacCtrl+Shift+Period"
+      },
+      "description": "Switch to the next newer recently used tab"
+    }
+  }
+}
