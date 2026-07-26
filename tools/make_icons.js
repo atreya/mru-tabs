@@ -111,16 +111,6 @@ function polygonCoverage(x, y, points) {
   return inside ? 1 : 0;
 }
 
-function lineCoverage(x, y, x1, y1, x2, y2, width) {
-  const dx = x2 - x1;
-  const dy = y2 - y1;
-  const lengthSquared = dx * dx + dy * dy;
-  const t = Math.max(0, Math.min(1, ((x - x1) * dx + (y - y1) * dy) / lengthSquared));
-  const px = x1 + t * dx;
-  const py = y1 + t * dy;
-  return Math.hypot(x - px, y - py) <= width / 2 ? 1 : 0;
-}
-
 function blend(pixel, color, alpha) {
   const sourceAlpha = (color[3] / 255) * alpha;
   const destAlpha = pixel[3] / 255;
@@ -183,7 +173,7 @@ function rect(size, x, y, w, h) {
 
 function makeIcon(size) {
   const buffer = Buffer.alloc(size * size * 4);
-  const radius = scale(size, 12);
+  const radius = scale(size, 10);
   const center = scale(size, 64);
 
   drawShape(buffer, size, [248, 250, 252, 255], (x, y) =>
@@ -203,41 +193,17 @@ function makeIcon(size) {
     circleStrokeCoverage(x, y, center, center, scale(size, 55), Math.max(1, scale(size, 2)))
   );
 
-  const cards = [
-    [rect(size, 38, 37, 52, 34), [37, 99, 235, 255]],
-    [rect(size, 43, 48, 52, 34), [20, 184, 166, 255]],
-    [rect(size, 34, 59, 52, 34), [255, 255, 255, 255]]
-  ];
-
-  for (const [shape, color] of cards.slice(0, 2)) {
-    drawShape(buffer, size, color, (x, y) => roundedRectCoverage(x, y, shape, radius));
-  }
-
-  const frontCard = cards[2][0];
+  drawShape(buffer, size, [37, 99, 235, 255], (x, y) =>
+    roundedRectCoverage(x, y, rect(size, 42, 43, 52, 36), radius)
+  );
   drawShape(buffer, size, [15, 23, 42, 70], (x, y) =>
-    roundedRectCoverage(x, y, rect(size, 37, 62, 52, 34), radius)
+    roundedRectCoverage(x, y, rect(size, 34, 57, 60, 38), radius)
   );
-  drawShape(buffer, size, cards[2][1], (x, y) =>
-    roundedRectCoverage(x, y, frontCard, radius)
+  drawShape(buffer, size, [255, 255, 255, 255], (x, y) =>
+    roundedRectCoverage(x, y, rect(size, 34, 54, 60, 38), radius)
   );
-  drawShape(buffer, size, [15, 23, 42, 255], (x, y) =>
-    lineCoverage(x, y, scale(size, 45), scale(size, 70), scale(size, 75), scale(size, 70), Math.max(1, scale(size, 4)))
-  );
-  drawShape(buffer, size, [15, 23, 42, 255], (x, y) =>
-    lineCoverage(x, y, scale(size, 45), scale(size, 81), scale(size, 67), scale(size, 81), Math.max(1, scale(size, 4)))
-  );
-
-  drawShape(buffer, size, [251, 113, 133, 255], (x, y) =>
-    circleCoverage(x, y, scale(size, 83), scale(size, 84), scale(size, 7))
-  );
-  drawShape(buffer, size, [15, 23, 42, 255], (x, y) =>
-    circleCoverage(x, y, scale(size, 92), scale(size, 34), scale(size, 4))
-  );
-  drawShape(buffer, size, [15, 23, 42, 255], (x, y) =>
-    circleCoverage(x, y, scale(size, 34), scale(size, 42), scale(size, 4))
-  );
-  drawShape(buffer, size, [15, 23, 42, 255], (x, y) =>
-    circleCoverage(x, y, scale(size, 35), scale(size, 94), scale(size, 4))
+  drawShape(buffer, size, [20, 184, 166, 255], (x, y) =>
+    roundedRectCoverage(x, y, rect(size, 43, 62, 42, 7), scale(size, 3.5))
   );
 
   return buffer;
